@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     39406,        830]
-NotebookOptionsPosition[     38921,        809]
-NotebookOutlinePosition[     39276,        825]
-CellTagsIndexPosition[     39233,        822]
+NotebookDataLength[     40068,        861]
+NotebookOptionsPosition[     39582,        840]
+NotebookOutlinePosition[     39937,        856]
+CellTagsIndexPosition[     39894,        853]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -228,14 +228,70 @@ Cell[BoxData[
      RowBox[{
       RowBox[{"{", 
        RowBox[{
-       "cites", ",", "n", ",", "size", ",", "offset", ",", "i", ",", "j", ",",
-         "touchupdate"}], "}"}], ",", "\[IndentingNewLine]", 
+       "gs", ",", "zs", ",", "cites", ",", "n", ",", "size", ",", "offset", 
+        ",", "i", ",", "j", ",", "touchupdate"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"n", "=", 
         RowBox[{"Length", "[", "grid", "]"}]}], ";", "\[IndentingNewLine]", 
        RowBox[{"size", "=", "0"}], ";", "\[IndentingNewLine]", 
        RowBox[{"touchupdate", " ", "=", " ", "touched"}], ";", 
        "\[IndentingNewLine]", 
+       RowBox[{"gs", " ", "=", " ", 
+        RowBox[{"ArrayPad", "[", 
+         RowBox[{"grid", ",", "1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"zs", " ", "=", " ", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{"0", ",", 
+            RowBox[{"n", "+", "2"}]}], "]"}], ",", 
+          RowBox[{"n", "+", "2"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", " ", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "2"}], ",", 
+         RowBox[{"i", "\[LessEqual]", 
+          RowBox[{"n", "+", "1"}]}], ",", 
+         RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"For", "[", 
+           RowBox[{
+            RowBox[{"j", "=", "2"}], ",", 
+            RowBox[{"j", "\[LessEqual]", 
+             RowBox[{"n", "+", "1"}]}], ",", 
+            RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{"!!", 
+              RowBox[{"Bounded", " ", "on", " ", "the", " ", 
+               RowBox[{"left", "!!"}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"zs", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", "j"}], "]"}], "]"}], "=", 
+              RowBox[{
+               RowBox[{"4", 
+                RowBox[{"gs", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", ",", "j"}], "]"}], "]"}]}], "-", 
+               RowBox[{"gs", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"j", "+", "1"}]}], "]"}], "]"}], "-", 
+               RowBox[{"gs", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"j", "-", "1"}]}], "]"}], "]"}], "-", 
+               RowBox[{"gs", "[", 
+                RowBox[{"[", 
+                 RowBox[{
+                  RowBox[{"i", "+", "1"}], ",", "j"}], "]"}], "]"}], "-", 
+               RowBox[{"gs", "[", 
+                RowBox[{"[", 
+                 RowBox[{
+                  RowBox[{"i", "-", "1"}], ",", "j"}], "]"}], "]"}]}]}], 
+             ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"(*", " ", 
         RowBox[{
         "Find", " ", "the", " ", "location", " ", "of", " ", "the", " ", 
@@ -249,7 +305,7 @@ Cell[BoxData[
             RowBox[{"If", "[", 
              RowBox[{
               RowBox[{
-               RowBox[{"grid", "[", 
+               RowBox[{"zs", "[", 
                 RowBox[{"[", 
                  RowBox[{"i", ",", "j"}], "]"}], "]"}], ">", "max"}], ",", 
               "\[IndentingNewLine]", 
@@ -409,120 +465,112 @@ Cell[BoxData[
    3.689385570403172*^9}, {3.689385663556147*^9, 3.6893857047395487`*^9}, 
    3.6893857353792677`*^9, {3.689385796154834*^9, 3.6893858039357643`*^9}, {
    3.689385980946154*^9, 3.689386024350621*^9}, {3.689386069953994*^9, 
-   3.689386133315227*^9}, {3.689386268491403*^9, 3.689386286938368*^9}}],
+   3.689386133315227*^9}, {3.689386268491403*^9, 3.689386286938368*^9}, {
+   3.690477971404748*^9, 3.6904781366880703`*^9}}],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{
+  RowBox[{"(*", "MAIN", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{
+    RowBox[{"DynamicModule", "[", "\[IndentingNewLine]", 
      RowBox[{
-      RowBox[{
+      RowBox[{"{", 
        RowBox[{
-        RowBox[{
-         RowBox[{
-          RowBox[{"(*", "MAIN", "*)"}], "\[IndentingNewLine]", 
-          RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
-           RowBox[{"DynamicModule", "[", "\[IndentingNewLine]", 
+        RowBox[{"i", "=", "0"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"m", "=", 
+         RowBox[{"InitializePile", "[", 
+          RowBox[{"size", ",", "initialdistr", ",", "max"}], "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"avalanching", "=", "False"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"avalanche", "=", 
+         RowBox[{"InitializePile", "[", 
+          RowBox[{"size", ",", "\"\<Zero\>\"", ",", "max"}], "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"touched", " ", "=", " ", 
+         RowBox[{"InitializePile", "[", 
+          RowBox[{"size", ",", "\"\<Zero\>\"", ",", "max"}], "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"avalancheiters", " ", "=", " ", "0"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"avalanchelength", " ", "=", " ", 
+         RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"avalanchesize", " ", "=", " ", 
+         RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"running", " ", "=", " ", "False"}]}], "\[IndentingNewLine]", 
+       "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "Graphic", " ", "and", " ", "Table", " ", "of", " ", "data", " ", 
+        "are", " ", "held", " ", "in", " ", "a", " ", "GraphicsGrid"}], 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"Dynamic", "[", 
+       RowBox[{"GraphicsGrid", "[", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"{", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"ArrayPlot", "[", "\[IndentingNewLine]", 
+            RowBox[{"(*", 
+             RowBox[{"Check", " ", "if", " ", "we", " ", "are", " ", 
+              RowBox[{"running", ".", " ", "Allows"}], " ", "for", " ", 
+              "manual", " ", "stop"}], " ", "*)"}], "\[IndentingNewLine]", 
             RowBox[{
-             RowBox[{"{", 
-              RowBox[{
-               RowBox[{"i", "=", "0"}], ",", "\[IndentingNewLine]", 
-               RowBox[{"m", "=", 
-                RowBox[{"InitializePile", "[", 
-                 RowBox[{"size", ",", "initialdistr", ",", "max"}], "]"}]}], 
-               ",", "\[IndentingNewLine]", 
-               RowBox[{"avalanching", "=", "False"}], ",", 
-               "\[IndentingNewLine]", 
-               RowBox[{"avalanche", "=", 
-                RowBox[{"InitializePile", "[", 
-                 RowBox[{"size", ",", "\"\<Zero\>\"", ",", "max"}], "]"}]}], 
-               ",", "\[IndentingNewLine]", 
-               RowBox[{"touched", " ", "=", " ", 
-                RowBox[{"InitializePile", "[", 
-                 RowBox[{"size", ",", "\"\<Zero\>\"", ",", "max"}], "]"}]}], 
-               ",", "\[IndentingNewLine]", 
-               RowBox[{"avalancheiters", " ", "=", " ", "0"}], ",", 
-               "\[IndentingNewLine]", 
-               RowBox[{"avalanchelength", " ", "=", " ", 
-                RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
-               RowBox[{"avalanchesize", " ", "=", " ", 
-                RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
-               RowBox[{"running", " ", "=", " ", "False"}]}], 
-              "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
-             RowBox[{"(*", 
-              RowBox[{
-              "Graphic", " ", "and", " ", "Table", " ", "of", " ", "data", 
-               " ", "are", " ", "held", " ", "in", " ", "a", " ", 
-               "GraphicsGrid"}], "*)"}], "\[IndentingNewLine]", 
-             RowBox[{"Dynamic", "[", 
-              RowBox[{"GraphicsGrid", "[", "\[IndentingNewLine]", 
-               RowBox[{"{", 
-                RowBox[{"{", "\[IndentingNewLine]", 
-                 RowBox[{"ArrayPlot", "[", "\[IndentingNewLine]", 
-                  RowBox[{"(*", 
-                   RowBox[{"Check", " ", "if", " ", "we", " ", "are", " ", 
-                    RowBox[{"running", ".", " ", "Allows"}], " ", "for", " ", 
-                    "manual", " ", "stop"}], " ", "*)"}], 
-                  "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"If", "[", 
+               RowBox[{"run", ",", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"running", "=", "True"}], ";"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"running", "=", "False"}], ";", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"avalanching", "=", "False"}], ";"}]}], "]"}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"(*", 
+               RowBox[{
+               "Check", " ", "if", " ", "we", " ", "need", " ", "to", " ", 
+                "calculate", " ", "avalanches"}], "*)"}], 
+              "\[IndentingNewLine]", 
+              RowBox[{"(*", 
+               RowBox[{
+               "This", " ", "is", " ", "checked", " ", "after", " ", "every", 
+                " ", "time", " ", "a", " ", "new", " ", "grain", " ", "is", 
+                " ", "added"}], " ", "*)"}], "\[IndentingNewLine]", 
+              RowBox[{"If", "[", 
+               RowBox[{"avalanching", ",", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"Pause", "[", "0.01", "]"}], ";", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"avalanche", ",", "avalanching", ",", "touched"}], 
+                   "}"}], "=", 
+                  RowBox[{"Avalanche", "[", 
+                   RowBox[{"m", ",", "max", ",", "touched"}], "]"}]}], ";", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"m", " ", "=", " ", 
+                  RowBox[{"m", " ", "+", " ", "avalanche"}]}], ";", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"(*", 
                   RowBox[{
+                  "We", " ", "can", " ", "run", " ", "again", " ", "once", 
+                   " ", "there", " ", "are", " ", "no", " ", "more", " ", 
+                   "topples"}], "*)"}], "\[IndentingNewLine]", 
+                 RowBox[{"If", "[", 
+                  RowBox[{"avalanching", ",", "\[IndentingNewLine]", 
                    RowBox[{
-                    RowBox[{"If", "[", 
-                    RowBox[{"run", ",", "\[IndentingNewLine]", 
-                    RowBox[{
-                    RowBox[{"running", "=", "True"}], ";"}], ",", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{
-                    RowBox[{"running", "=", "False"}], ";", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"avalanching", "=", "False"}], ";"}]}], "]"}], 
-                    ";", "\[IndentingNewLine]", 
-                    RowBox[{"(*", 
-                    RowBox[{
-                    "Check", " ", "if", " ", "we", " ", "need", " ", "to", 
-                    " ", "calculate", " ", "avalanches"}], "*)"}], 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"(*", 
-                    RowBox[{
-                    "This", " ", "is", " ", "checked", " ", "after", " ", 
-                    "every", " ", "time", " ", "a", " ", "new", " ", "grain", 
-                    " ", "is", " ", "added"}], " ", "*)"}], 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"If", "[", 
-                    RowBox[{"avalanching", ",", "\[IndentingNewLine]", 
-                    RowBox[{
-                    RowBox[{"Pause", "[", "0.01", "]"}], ";", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{
-                    RowBox[{"{", 
-                    RowBox[{"avalanche", ",", "avalanching", ",", "touched"}],
-                     "}"}], "=", 
-                    RowBox[{"Avalanche", "[", 
-                    RowBox[{"m", ",", "max", ",", "touched"}], "]"}]}], ";", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"m", " ", "=", " ", 
-                    RowBox[{"m", " ", "+", " ", "avalanche"}]}], ";", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"(*", 
-                    RowBox[{
-                    "We", " ", "can", " ", "run", " ", "again", " ", "once", 
-                    " ", "there", " ", "are", " ", "no", " ", "more", " ", 
-                    "topples"}], "*)"}], "\[IndentingNewLine]", 
-                    RowBox[{"If", "[", 
-                    RowBox[{"avalanching", ",", "\[IndentingNewLine]", 
-                    RowBox[{
                     RowBox[{"avalancheiters", " ", "++"}], ";", 
                     "\[IndentingNewLine]", 
                     RowBox[{"running", "=", "False"}], ";"}], 
-                    "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
-                    RowBox[{"(*", 
+                   "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+                   RowBox[{"(*", 
                     RowBox[{
                     "Record", " ", "the", " ", "corresponding", " ", 
                     "avalanche", " ", "size", " ", "and", " ", "length"}], 
                     " ", "*)"}], "\[IndentingNewLine]", 
-                    RowBox[{
+                   RowBox[{
                     RowBox[{"avalanchelength", " ", "=", " ", 
                     RowBox[{"Join", "[", 
                     RowBox[{
@@ -553,23 +601,22 @@ Cell[BoxData[
                     RowBox[{"avalancheiters", " ", "=", " ", "0"}], ";", 
                     "\[IndentingNewLine]", 
                     RowBox[{"running", "=", "True"}], ";"}]}], 
-                    "\[IndentingNewLine]", "]"}], ";"}]}], 
-                    "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
-                    
-                    RowBox[{"If", "[", 
-                    RowBox[{"running", ",", "\[IndentingNewLine]", 
-                    RowBox[{
-                    RowBox[{"Pause", "[", "0.01", "]"}], ";", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"If", "[", 
-                    RowBox[{
-                    RowBox[{
+                  "\[IndentingNewLine]", "]"}], ";"}]}], 
+               "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"If", "[", 
+               RowBox[{"running", ",", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"Pause", "[", "0.01", "]"}], ";", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{
                     RowBox[{"Min", "[", "m", "]"}], "\[Equal]", "max"}], ",", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{
+                   "\[IndentingNewLine]", 
+                   RowBox[{
                     RowBox[{"running", "=", "False"}], ";"}], 
-                    "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
-                    RowBox[{
+                   "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+                   RowBox[{
                     RowBox[{"i", "=", 
                     RowBox[{"i", "+", "1"}]}], ";", "\[IndentingNewLine]", 
                     RowBox[{"m", " ", "=", " ", 
@@ -577,52 +624,42 @@ Cell[BoxData[
                     RowBox[{"fill", "[", 
                     RowBox[{"m", ",", "max", ",", "generatingdistr"}], 
                     "]"}]}]}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"avalanching", "=", "True"}], ";"}]}], 
-                    "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
-                    "m"}], "\[IndentingNewLine]", ",", 
-                   RowBox[{"ImageSize", "\[Rule]", 
-                    RowBox[{"{", 
-                    RowBox[{"300", ",", "300"}], "}"}]}], 
-                   "\[IndentingNewLine]", ",", 
-                   RowBox[{"PlotLabel", "\[Rule]", "i"}], 
-                   "\[IndentingNewLine]", ",", 
-                   RowBox[{"ColorFunction", "\[Rule]", 
-                    RowBox[{"Function", "[", 
-                    RowBox[{"{", 
-                    RowBox[{"x", ",", "y", ",", "z"}], "}"}], 
-                    RowBox[{"(*", 
-                    RowBox[{
-                    RowBox[{
-                    RowBox[{"Hue", "[", 
-                    RowBox[{"Mod", "[", 
-                    RowBox[{"z", ",", "1"}], "]"}], "]"}], "]"}], ",", 
-                    RowBox[{"ColorFunctionScaling", "\[Rule]", "False"}]}], 
-                    "*)"}], "]"}]}], "\[IndentingNewLine]", ",", 
-                   "\[IndentingNewLine]", 
-                   RowBox[{"Grid", "[", 
-                    RowBox[{
-                    RowBox[{"{", "\[IndentingNewLine]", 
-                    RowBox[{
-                    RowBox[{"{", 
-                    RowBox[{"\"\<Size\>\"", ",", "size"}], "}"}], ",", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"{", 
-                    RowBox[{"\"\<Iterations\>\"", ",", "i"}], "}"}], ",", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"{", 
-                    RowBox[{"\"\<Avalanche Length\>\"", ",", 
-                    RowBox[{"ListPlot", "[", "avalanchelength", "]"}]}], 
-                    "}"}], ",", "\[IndentingNewLine]", 
-                    RowBox[{"{", 
-                    RowBox[{"\"\<Avalanche Size\>\"", ",", 
-                    RowBox[{"ListPlot", "[", "avalanchesize", "]"}]}], 
-                    "}"}]}], "\[IndentingNewLine]", "}"}], ",", 
-                    RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], 
-                  "\[IndentingNewLine]"}]}]}]}]}]}]}]}], "}"}], "}"}], 
-        "\[IndentingNewLine]"}], "]"}], "]"}], "\[IndentingNewLine]"}], "]"}],
+                 "\[IndentingNewLine]", 
+                 RowBox[{"avalanching", "=", "True"}], ";"}]}], 
+               "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+              "m"}], "\[IndentingNewLine]", ",", 
+             RowBox[{"ImageSize", "\[Rule]", 
+              RowBox[{"{", 
+               RowBox[{"300", ",", "300"}], "}"}]}], "\[IndentingNewLine]", 
+             ",", 
+             RowBox[{"PlotLabel", "\[Rule]", "i"}], "\[IndentingNewLine]", 
+             ",", 
+             RowBox[{"PlotRange", "\[Rule]", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "max"}], "}"}]}]}], "]"}], 
+           "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+           RowBox[{"Grid", "[", 
+            RowBox[{
+             RowBox[{"{", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"\"\<Size\>\"", ",", "size"}], "}"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"{", 
+                RowBox[{"\"\<Iterations\>\"", ",", "i"}], "}"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"{", 
+                RowBox[{"\"\<Avalanche Length\>\"", ",", 
+                 RowBox[{"ListPlot", "[", "avalanchelength", "]"}]}], "}"}], 
+               ",", "\[IndentingNewLine]", 
+               RowBox[{"{", 
+                RowBox[{"\"\<Avalanche Size\>\"", ",", 
+                 RowBox[{"ListPlot", "[", "avalanchesize", "]"}]}], "}"}]}], 
+              "\[IndentingNewLine]", "}"}], ",", 
+             RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], 
+          "\[IndentingNewLine]", "}"}], "}"}], "\[IndentingNewLine]", "]"}], 
+       "]"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
     "\[IndentingNewLine]", 
-   RowBox[{",", "\[IndentingNewLine]", 
     RowBox[{"{", 
      RowBox[{"size", ",", "5", ",", "50", ",", "1"}], "}"}], ",", 
     "\[IndentingNewLine]", 
@@ -644,7 +681,7 @@ Cell[BoxData[
      RowBox[{"run", ",", 
       RowBox[{"{", 
        RowBox[{"False", ",", "True"}], "}"}]}], "}"}]}], 
-   "\[IndentingNewLine]"}], "]"}]], "Input",
+   "\[IndentingNewLine]", "]"}]}]], "Input",
  CellChangeTimes->{
   3.6891382821639442`*^9, {3.6891392957590714`*^9, 3.689139327330873*^9}, {
    3.689139366458383*^9, 3.689139434113359*^9}, {3.689139478898641*^9, 
@@ -689,14 +726,16 @@ Cell[BoxData[
    3.689385479104125*^9, 3.689385480044586*^9}, {3.689386172939402*^9, 
    3.689386183534944*^9}, {3.689474675705894*^9, 3.689474689633214*^9}, {
    3.68947473507345*^9, 3.689474739989723*^9}, {3.690415996485125*^9, 
-   3.690415999543845*^9}, {3.690416035234243*^9, 3.690416079290082*^9}}],
+   3.690415999543845*^9}, {3.690416035234243*^9, 3.690416079290082*^9}, {
+   3.6904782222918797`*^9, 3.690478224890201*^9}, {3.690478285274479*^9, 
+   3.6904782923715763`*^9}, {3.690478419750866*^9, 3.690478419965516*^9}}],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
    DynamicModuleBox[{$CellContext`generatingdistr$$ = 
     "Uniform", $CellContext`initialdistr$$ = "Zero", $CellContext`max$$ = 
-    4, $CellContext`run$$ = False, $CellContext`size$$ = 9, Typeset`show$$ = 
+    4, $CellContext`run$$ = False, $CellContext`size$$ = 5, Typeset`show$$ = 
     True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{
@@ -707,23 +746,23 @@ Cell[BoxData[
       "Fill", "Centered", "Uniform", "None"}}, {
       Hold[$CellContext`run$$], {False, True}}}, Typeset`size$$ = {
     652., {161., 166.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`size$16391$$ = 
-    0, $CellContext`initialdistr$16392$$ = False, $CellContext`max$16393$$ = 
-    0, $CellContext`generatingdistr$16394$$ = 0, $CellContext`run$16395$$ = 
-    False}, 
+    Typeset`skipInitDone$$ = True, $CellContext`size$356160$$ = 
+    0, $CellContext`initialdistr$356161$$ = False, $CellContext`max$356162$$ =
+     0, $CellContext`generatingdistr$356163$$ = 0, $CellContext`run$356164$$ =
+     False}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
       "Variables" :> {$CellContext`generatingdistr$$ = 
         "Fill", $CellContext`initialdistr$$ = "Uniform", $CellContext`max$$ = 
         4, $CellContext`run$$ = False, $CellContext`size$$ = 5}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`size$$, $CellContext`size$16391$$, 0], 
-        Hold[$CellContext`initialdistr$$, $CellContext`initialdistr$16392$$, 
+        Hold[$CellContext`size$$, $CellContext`size$356160$$, 0], 
+        Hold[$CellContext`initialdistr$$, $CellContext`initialdistr$356161$$, 
          False], 
-        Hold[$CellContext`max$$, $CellContext`max$16393$$, 0], 
+        Hold[$CellContext`max$$, $CellContext`max$356162$$, 0], 
         Hold[$CellContext`generatingdistr$$, \
-$CellContext`generatingdistr$16394$$, 0], 
-        Hold[$CellContext`run$$, $CellContext`run$16395$$, False]}, 
+$CellContext`generatingdistr$356163$$, 0], 
+        Hold[$CellContext`run$$, $CellContext`run$356164$$, False]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -795,16 +834,8 @@ $CellContext`generatingdistr$$]; Null]; $CellContext`avalanching = True;
    Deployed->True,
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
- CellChangeTimes->{
-  3.689384369600779*^9, {3.68938453902145*^9, 3.689384564331027*^9}, 
-   3.689384603278397*^9, 3.6893846745621147`*^9, {3.689384804468492*^9, 
-   3.689384817026346*^9}, 3.689384898142068*^9, 3.6893849491020937`*^9, 
-   3.6893850677766027`*^9, 3.689385453313951*^9, {3.689385484135734*^9, 
-   3.6893855044171753`*^9}, 3.689385586029091*^9, {3.689385689393072*^9, 
-   3.689385741825293*^9}, 3.689385812513947*^9, {3.689386003789351*^9, 
-   3.689386027463387*^9}, {3.689386073554811*^9, 3.689386098961729*^9}, 
-   3.6893861352897987`*^9, 3.689386184268572*^9, 3.6893862914623537`*^9, {
-   3.689474657864416*^9, 3.689474690008819*^9}, 3.689474740571311*^9}]
+ CellChangeTimes->{{3.690478225576037*^9, 3.690478249218836*^9}, 
+   3.690478292901065*^9, 3.690478407109984*^9}]
 }, Open  ]]
 },
 WindowSize->{1280, 703},
@@ -827,10 +858,10 @@ Notebook[{
 Cell[558, 20, 3265, 68, 267, "Input",
  InitializationCell->True],
 Cell[3826, 90, 5199, 119, 318, "Input"],
-Cell[9028, 211, 9189, 200, 743, "Input"],
+Cell[9028, 211, 11528, 257, 879, "Input"],
 Cell[CellGroupData[{
-Cell[18242, 415, 14570, 276, 1253, "Input"],
-Cell[32815, 693, 6090, 113, 534, "Output"]
+Cell[20581, 472, 13442, 258, 1253, "Input"],
+Cell[34026, 732, 5540, 105, 534, "Output"]
 }, Open  ]]
 }
 ]
