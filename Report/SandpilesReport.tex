@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+%Title Info
+\title{\vspace{-2cm}Sandpiles} %remove the extra spacing at the top
+\author{Alex Pan}
+\date{} %blank the date
+
+\begin{document}
+\maketitle
+
+%--------------------------- Abstract ---------------------------%
+\begin{abstract}
+In the following, I will discuss the sandpile model and the closely-related phenomenon of self-organized criticality. I will discuss some features of sandpiles that we might want to know information about and the utility of simulation in obtaining measurements on sandpiles. I then present my own simulations of 1D and 2D sandpiles and discuss the results.
+\end{abstract}
+
+%--------------------------- Intro ---------------------------%
+\section{Introduction}
+The \textit{sandpile} model was first introduced in 1978 by Bak, Tang, and Weisenfeld, as a system capable of displaying spatial and temporal power laws and scale-invariance without finely-tuned parameters. This behavior was described as \textit{self-organized criticality} (SOC) because of the way these systems can arrive at critical states on their own. SOC was given as the underlying process behind ubiquitous and complex phenomena like fractal geometry and ``$1/f$'' noise in the 1987 paper, and has since been used to model physical systems like earthquakes and rainfall, as well as non-physical systems in sociology and stock-markets.
+
+%--------------------------- Prelims ---------------------------%
+\section{Preliminaries}
+\subsection{Self-Organized Criticality}
+\textit{Critical points} exhibit scale-invariance through features like fractals and power laws, but cannot necessarily be reached depending on a system's parameters. For example, in the Ising model, the system doesn't display critical behavior unless the parameters have been carefully tuned. However, in systems that exhibit SOC, parameters can be changed widely without affecting the systems' ability to start exhibiting critical behavior.
+
+
+\subsection{Sandpiles}
+Sandpiles have become a canonical model for SOC. We can formulate sandpiles as graphs with weighted vertices. We can think of each vertex as having a weight that represents a stack of particles that \textit{topples} when the number of particles exceeds a certain value. When a vertex topples, it starts an \textit{avalanche} by losing particles (i.e. weight) and sending them adjacent adjacent vertices (i.e. increasing their weight).
+
+Let a sandpile be represented by the graph $G=(V,E)$, where $V$ is the set of vertices and $E$ is the set of edges. Set a critical weight $K \in \mathbb{Z}^+$, that essentially acts as a bound on the weight of vertices, and let there be a weighting function $w:V \rightarrow [0,K-1]$. We can define the behavior of adding weight to a vertex as follows:
+
+\begin{equation}
+Add(v) =
+\begin{cases}
+\text{if }w(v) < K-1: & w(v) = w(v) + 1\\
+\text{else: }&
+\text{for all } (v,u)\in E: 
+w(v) = w(v) - 1, Add(u)\\
+\end{cases}
+\end{equation}
+
+This encodes a couple important things. Firstly, as mentioned above, when a vertex loses weight it is giving weight to adjacent vertices. This toppling is triggered only when the weight of a vertex exceeds the critical value $K$. Secondly, this is recursive, which means one toppling can trigger more topplings which is the behavior of an avalanche. 
+
+Some discussion of bounding the graph (ie sinks)
+
+This is a little abstract however, so in the following, this model will be restricted to the 1D and 2D lattice graphs. 
+
+
+\subsection{Measurements}
+There are a features that are of interest in sandpiles. The goal is to observe some form of scale invariance over the starting parameters of the sandpile. 
+
+The size of avalanches, the number of vertices affected, the length of avalanches. 
+
+The number of grains added to the pile and the number of grains lost in the pile.
+
+
+%--------------------------- 1D ---------------------------%
+\section{Sandpiles in 1D}
+
+
+%--------------------------- 2D ---------------------------%
+\section{Sandpiles in 2D}
+
+
+
+%--------------------------- Conclusion ---------------------------%
+\section{Conclusion}
+
+
+\end{document}
