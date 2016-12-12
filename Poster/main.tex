@@ -94,7 +94,7 @@
 
 \begin{alertblock}{Abstract}
 
-In the following, I will discuss the sandpile model and the closely-related phenomenon of self-organized criticality. I will discuss some features of sandpiles that we might want to know information about and the utility of simulation in obtaining measurements on sandpiles. I then present my own simulations of some 1D and 2D sandpile configurations and discuss the results. I will also dedicate some of the discussion to various issues I ran into when trying to get my simulations working.
+In the following, I will introduce the sandpile model and the closely-related phenomenon of self-organized criticality. I present my own simulations of some 1D and 2D sandpile configurations and discuss the results. The focus of these simulations was to investigate the presence of power laws in 2D sandpiles with varied toppling processes. Simulation results suggest that the power laws exhibited by avalanche size are invariant to dependence on neighboring states in the toppling process. 
 
 \end{alertblock}
 
@@ -128,7 +128,7 @@ The \textit{sandpile} model was first introduced in 1978 by Bak, Tang, and Weise
 
 \begin{block}{Sandpiles}
 
-In very general terms, sandpiles can be thought of as cellular automota. There are three things that characterize the behavior of a specific configuration:
+In very general terms, sandpiles can be thought of as cellular automota. There are three things that characterize the toppling behavior of a specific configuration:
 \begin{itemize}
 \item A measure $z$ (not in the formal sense)
 \item A critical value $K$
@@ -136,7 +136,7 @@ In very general terms, sandpiles can be thought of as cellular automota. There a
 \end{itemize} 
 Whenever a cell's measure exceeds the critical value, it performs the action $f$. (i.e. when a cell $x$ has $z(x)>K$, $f(x)$ happens).
 
-In the original paper, this is defined more strictly: when a cell's slope with its neighbors exceeds a critical value, it loses some of its weight to its nieghbors. However, I prefer to use looser defintions because I believe the stricter ones might give some false intuition about the measure. While slope is a good example because of its physical parallels, it suggests that the measure must be defined on a relationship between a cell and its neighbors. However this does not seem to be the case according to simulated results, as I will discuss later.
+In the original paper, this is defined more strictly: when a cell's slope with its neighbors exceeds a critical value, it loses some of its weight to its neighbors. However, I prefer to use looser defintions because I believe stricter ones (like the aforementioned) might give some false intuition about the measure. While slope is a good example because of its physical parallels, it suggests that the measure must be defined on a relationship between a cell and its neighbors. However this does not seem to be the case according to simulated results, as I will discuss later.
 
 For the sake of simplicity and clarity, I focused on the 1D and 2D models used by Bak, Tang, and Weisenfeld, as well as some variants in the 2D case.
 
@@ -148,9 +148,9 @@ For the sake of simplicity and clarity, I focused on the 1D and 2D models used b
 
 \begin{block}{Setup}
 
-As physical experiments have found, observing SOC on real sandpiles is not easy or necessarily possible. Instead, I use Monte Carlo simulations because they provide very high control over the parameters, which we expect to be important in observing SOC, and because they provide can provide fine-grain measurements that might not be easy to obtain in a physical setting.
+As physical experiments have found, observing SOC on real sandpiles is not easy or necessarily possible. Here, I use Monte Carlo simulations because they provide very high control over the parameters, which we expect to be important in observing SOC, and because they provide can provide fine-grain measurements that might not be easy to obtain in a physical setting.
 
-In all configurations, I add grains to the system uniformly, because that seems to be the ``most'' random way of perturbing the system. The key measurements of interest are the size and length of avalanches. 
+In all configurations, I add grains to the system uniformly, because that seems to be the ``most'' random way of perturbing the system. The key value of interest is the distribution of avalanche sizes $P(s)$, which is calculated by tracking avalanche sizes over a sandpile's evolution. 
 
 
 \end{block}
@@ -159,7 +159,7 @@ In all configurations, I add grains to the system uniformly, because that seems 
 
 \end{column} % End of column 2.2
 
-
+\begin{column}{\sepwid}\end{column} % Empty spacer column
 
 %----------------------------------------------------------------------------------------
 
@@ -169,7 +169,7 @@ In all configurations, I add grains to the system uniformly, because that seems 
 %----------------------------------------------------------------------------------------
 %	1D BTW
 %----------------------------------------------------------------------------------------
-\begin{block}{1D BTW Results}
+\begin{block}{1D BTW Criticality}
 
 The 1D case serves mainly as a proof of concept and a clean example of what criticality would look like intuitively. The BTW paper bounds their 1D sandpile on the left so that particles can only leave through the right. We expect the sandpile to reach a state where adding a subsequent grain could trigger either a local or global avalanche. This is confirmed by simulation: when starting with an empty pile and uniformly adding grains, the sandpile converges to the critical state (see Figure 1).
 
@@ -188,34 +188,18 @@ The 1D case serves mainly as a proof of concept and a clean example of what crit
 
 \begin{figure}
 \includegraphics[width=0.8\linewidth]{2D-btw.jpg}
-\caption{Figure caption}
+\caption{BTW Configuration}
 \end{figure}
 
 \begin{figure}
 \includegraphics[width=0.8\linewidth]{2D-sloped.jpg}
-\caption{Figure caption}
+\caption{``Sloped'' Configuration}
 \end{figure}
 
 \begin{figure}
 \includegraphics[width=0.8\linewidth]{2D-indep.jpg}
-\caption{Figure caption}
+\caption{``Independent'' Configuration}
 \end{figure}
-
-% Nunc tempus venenatis facilisis. Curabitur suscipit consequat eros non porttitor. Sed a massa dolor, id ornare enim:
-
-% \begin{table}
-% \vspace{2ex}
-% \begin{tabular}{l l l}
-% \toprule
-% \textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
-% \midrule
-% Treatment 1 & 0.0003262 & 0.562 \\
-% Treatment 2 & 0.0015681 & 0.910 \\
-% Treatment 3 & 0.0009271 & 0.296 \\
-% \bottomrule
-% \end{tabular}
-% \caption{Table caption}
-% \end{table}
 
 \end{block}
 
@@ -223,13 +207,17 @@ The 1D case serves mainly as a proof of concept and a clean example of what crit
 
 \end{column} % End of column 2.2
 
-
 \begin{column}{\sepwid}\end{column} % Empty spacer column
 
 \begin{column}{\onecolwid} % The third column
 
+%----------------------------------------------------------------------------------------
+%	2D Results Continuted
+%----------------------------------------------------------------------------------------
 
-\begin{block}{Modified 2D Results}
+\begin{block}{2D Results continued}
+
+Data was gathered from size 15x15 piles over 10,000 iterations, with varied measure and action in each pile. I plotted the distribution of avalanche sizes $P(s)$ and found that power laws were exhibited in all three configurations. Figures 2,3, and 4, also have the pile configurations after 10,000 iterations, which agree with the respective intuitive critical states according to their toppling rules.
 
 \end{block}
 
@@ -237,9 +225,11 @@ The 1D case serves mainly as a proof of concept and a clean example of what crit
 %	CONCLUSION
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Conclusion}
+\begin{block}{Conclusion and Future Work}
 
-
+Though it is tempting to say SOC is invariant to the toppling process, that is not necessarily the case. Though invariance was observed for $P(s)$, it was found that in the ``Sloped'' configuration, plots of the avalanche length no longer exhibit power laws.
+It is also noted that the toppling process does affect the range of possible avalanche sizes, even if power laws were still observed. A question that remains unanswered is whether this behavior is true for all toppling rules or if the ones I used were simply lucky picks.
+Further work could be done on either a closer examination of other SOC features affected by toppling behavior, or an investigation into the effects of other topplings rules on avalanche size.
 
 \end{block}
 
@@ -248,7 +238,7 @@ The 1D case serves mainly as a proof of concept and a clean example of what crit
 %	REFERENCES
 %----------------------------------------------------------------------------------------
 
-\begin{block}{References}
+\begin{block}{Selected References}
 
 \nocite{*} % Insert publications even if they are not cited in the poster
 \small{\bibliographystyle{unsrt}
@@ -270,7 +260,7 @@ The 1D case serves mainly as a proof of concept and a clean example of what crit
 \item Github: \href{https://github.com/apanana/Sandpiles}{https://github.com/apanana/Sandpiles}
 \end{itemize}
 
-There are several Mathematica notebooks containing both data and user-interactive dynamic modules that allow for further manipulation of parameters
+There are several Mathematica notebooks for data collection and user-interaction modules for visualization
 \end{alertblock}
 
 %----------------------------------------------------------------------------------------
