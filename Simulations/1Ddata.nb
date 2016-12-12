@@ -10,28 +10,14 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     94714,       2167]
-NotebookOptionsPosition[     93822,       2133]
-NotebookOutlinePosition[     94177,       2149]
-CellTagsIndexPosition[     94134,       2146]
+NotebookDataLength[     68832,       1671]
+NotebookOptionsPosition[     68146,       1644]
+NotebookOutlinePosition[     68501,       1660]
+CellTagsIndexPosition[     68458,       1657]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
-
-Cell[CellGroupData[{
-Cell[TextData[{
- StyleBox["Simulations of a 1D Sandpile", "Section"],
- "\nUsing a dynamic module to allow a user to specify parameters while \
-updating a visual of the sandpile along with graphs of relevant information.\n\
-I\[CloseCurlyQuote]m going to investigate a sandpile that is bounded on one \
-side (ie can\[CloseCurlyQuote]t lose any weight through that side) but can \
-lose particles through the other.\nThe hope is that this will give a clear \
-visualization of the critical state of the pile."
-}], "Subsubsection",
- CellChangeTimes->{{3.690415443156637*^9, 3.690415609862341*^9}, 
-   3.6904951613055573`*^9}],
-
 Cell[BoxData[
  RowBox[{
   RowBox[{"(*", 
@@ -372,479 +358,6 @@ Cell[BoxData[
    3.690486882295949*^9, 3.690486934349794*^9}, {3.690486999695487*^9, 
    3.69048705622736*^9}, 3.6904871485578947`*^9, {3.690487179361423*^9, 
    3.690487189931266*^9}, {3.6904907604578648`*^9, 3.690490764004065*^9}}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"(*", "MAIN", "*)"}], "\[IndentingNewLine]", 
-  RowBox[{
-   RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"DynamicModule", "[", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"i", "=", "0"}], ",", "\[IndentingNewLine]", 
-         RowBox[{"m", "=", 
-          RowBox[{"InitializePile", "[", 
-           RowBox[{"size", ",", "initialdistr", ",", "criticalvalue"}], 
-           "]"}]}], ",", "\[IndentingNewLine]", 
-         RowBox[{"maxval", "=", "0"}], ",", "\[IndentingNewLine]", 
-         RowBox[{"avgheight", " ", "=", " ", "0"}], ",", 
-         "\[IndentingNewLine]", 
-         RowBox[{"totaltopples", "=", "0"}], ",", "\[IndentingNewLine]", 
-         RowBox[{"topples", " ", "=", " ", "0"}], ",", "\[IndentingNewLine]", 
-         
-         RowBox[{"avalanching", "=", "False"}], ",", "\[IndentingNewLine]", 
-         RowBox[{"avalanche", "=", 
-          RowBox[{"InitializePile", "[", 
-           RowBox[{"size", ",", "\"\<Zero\>\"", ",", "criticalvalue"}], 
-           "]"}]}], ",", "\[IndentingNewLine]", 
-         RowBox[{"touched", " ", "=", " ", 
-          RowBox[{"InitializePile", "[", 
-           RowBox[{"size", ",", "\"\<Zero\>\"", ",", "criticalvalue"}], 
-           "]"}]}], ",", "\[IndentingNewLine]", 
-         RowBox[{"avalancheiters", " ", "=", " ", "0"}], ",", 
-         "\[IndentingNewLine]", 
-         RowBox[{"avalanchelength", " ", "=", " ", 
-          RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
-         RowBox[{"avalanchesize", " ", "=", " ", 
-          RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
-         RowBox[{"running", " ", "=", " ", "False"}]}], "\[IndentingNewLine]",
-         "}"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"(*", 
-        RowBox[{
-        "Graphic", " ", "and", " ", "Table", " ", "of", " ", "data", " ", 
-         "are", " ", "held", " ", "in", " ", "a", " ", "GraphicsGrid"}], 
-        "*)"}], "\[IndentingNewLine]", 
-       RowBox[{"Dynamic", "[", 
-        RowBox[{"GraphicsGrid", "[", "\[IndentingNewLine]", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"{", "\[IndentingNewLine]", 
-            RowBox[{
-             RowBox[{"BarChart", "[", "\[IndentingNewLine]", 
-              RowBox[{
-               RowBox[{
-                RowBox[{"If", "[", 
-                 RowBox[{
-                  RowBox[{
-                   RowBox[{"Max", "[", "m", "]"}], ">", "maxval"}], ",", 
-                  RowBox[{"maxval", "=", 
-                   RowBox[{"Max", "[", "m", "]"}]}]}], "]"}], ";", 
-                "\[IndentingNewLine]", 
-                RowBox[{"If", "[", 
-                 RowBox[{
-                  RowBox[{"maxval", "\[Equal]", "0"}], ",", 
-                  RowBox[{"maxval", "=", "1"}]}], "]"}], ";", 
-                "\[IndentingNewLine]", 
-                RowBox[{"avgheight", "=", 
-                 RowBox[{"N", "[", 
-                  RowBox[{"Mean", "[", "m", "]"}], "]"}]}], ";", 
-                "\[IndentingNewLine]", 
-                RowBox[{"(*", 
-                 RowBox[{"Check", " ", "if", " ", "we", " ", "are", " ", 
-                  RowBox[{"running", ".", " ", "Allows"}], " ", "for", " ", 
-                  "manual", " ", "stop"}], " ", "*)"}], "\[IndentingNewLine]", 
-                RowBox[{"If", "[", 
-                 RowBox[{"run", ",", "\[IndentingNewLine]", 
-                  RowBox[{
-                   RowBox[{"running", "=", "True"}], ";"}], ",", 
-                  "\[IndentingNewLine]", 
-                  RowBox[{
-                   RowBox[{"running", "=", "False"}], ";", 
-                   "\[IndentingNewLine]", 
-                   RowBox[{"avalanching", "=", "False"}], ";"}]}], "]"}], ";",
-                 "\[IndentingNewLine]", 
-                RowBox[{"(*", 
-                 RowBox[{
-                 "Check", " ", "if", " ", "we", " ", "need", " ", "to", " ", 
-                  "calculate", " ", "avalanches"}], "*)"}], 
-                "\[IndentingNewLine]", 
-                RowBox[{"(*", 
-                 RowBox[{
-                 "This", " ", "is", " ", "checked", " ", "after", " ", 
-                  "every", " ", "time", " ", "a", " ", "new", " ", "grain", 
-                  " ", "is", " ", "added"}], " ", "*)"}], 
-                "\[IndentingNewLine]", 
-                RowBox[{"If", "[", 
-                 RowBox[{"avalanching", ",", "\[IndentingNewLine]", 
-                  RowBox[{
-                   RowBox[{"Pause", "[", "0.01", "]"}], ";", 
-                   "\[IndentingNewLine]", 
-                   RowBox[{
-                    RowBox[{"{", 
-                    RowBox[{
-                    "avalanche", ",", "avalanching", ",", "touched", ",", 
-                    "topples"}], "}"}], "=", 
-                    RowBox[{"Avalanche", "[", 
-                    RowBox[{"m", ",", "criticalvalue", ",", "touched"}], 
-                    "]"}]}], ";", "\[IndentingNewLine]", 
-                   RowBox[{"m", " ", "=", " ", 
-                    RowBox[{"m", " ", "+", " ", "avalanche"}]}], ";", 
-                   "\[IndentingNewLine]", 
-                   RowBox[{"(*", 
-                    RowBox[{
-                    "We", " ", "can", " ", "run", " ", "again", " ", "once", 
-                    " ", "there", " ", "are", " ", "no", " ", "more", " ", 
-                    "topples"}], "*)"}], "\[IndentingNewLine]", 
-                   RowBox[{"If", "[", 
-                    RowBox[{"avalanching", ",", "\[IndentingNewLine]", 
-                    RowBox[{
-                    RowBox[{"avalancheiters", " ", "++"}], ";", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"running", "=", "False"}], ";"}], 
-                    "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
-                    RowBox[{"(*", 
-                    RowBox[{
-                    "Record", " ", "the", " ", "corresponding", " ", 
-                    "avalanche", " ", "size", " ", "and", " ", "length"}], 
-                    " ", "*)"}], "\[IndentingNewLine]", 
-                    RowBox[{
-                    RowBox[{"avalanchelength", " ", "=", " ", 
-                    RowBox[{"Join", "[", 
-                    RowBox[{
-                    RowBox[{"{", 
-                    RowBox[{"{", 
-                    RowBox[{"i", ",", "avalancheiters"}], "}"}], "}"}], ",", 
-                    "avalanchelength"}], "]"}]}], ";", "\[IndentingNewLine]", 
-                    
-                    RowBox[{"avalanchesize", " ", "=", " ", 
-                    RowBox[{"Join", "[", 
-                    RowBox[{
-                    RowBox[{"{", 
-                    RowBox[{"{", 
-                    RowBox[{"i", ",", 
-                    RowBox[{"Total", "[", "touched", "]"}]}], "}"}], "}"}], 
-                    ",", "avalanchesize"}], "]"}]}], ";", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"(*", 
-                    RowBox[{
-                    "Reset", " ", "the", " ", "number", " ", "of", " ", 
-                    "touched", " ", "nodes", " ", "and", " ", "avalanche", 
-                    " ", "iters"}], "*)"}], "\[IndentingNewLine]", 
-                    RowBox[{"touched", " ", "=", " ", 
-                    RowBox[{"InitializePile", "[", 
-                    RowBox[{
-                    "size", ",", "\"\<Zero\>\"", ",", "criticalvalue"}], 
-                    "]"}]}], ";", "\[IndentingNewLine]", 
-                    RowBox[{"avalancheiters", " ", "=", " ", "0"}], ";", 
-                    "\[IndentingNewLine]", 
-                    RowBox[{"running", "=", "True"}], ";"}]}], 
-                    "\[IndentingNewLine]", "]"}], ";"}]}], 
-                 "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
-                RowBox[{"If", "[", 
-                 RowBox[{"running", ",", "\[IndentingNewLine]", 
-                  RowBox[{
-                   RowBox[{"avgheight", "=", 
-                    RowBox[{"N", "[", 
-                    RowBox[{"Mean", "[", "m", "]"}], "]"}]}], ";", 
-                   "\[IndentingNewLine]", 
-                   RowBox[{"Pause", "[", "0.01", "]"}], ";", 
-                   "\[IndentingNewLine]", 
-                   RowBox[{"i", "=", 
-                    RowBox[{"i", "+", "1"}]}], ";", "\[IndentingNewLine]", 
-                   RowBox[{"m", " ", "=", " ", 
-                    RowBox[{"m", "+", " ", 
-                    RowBox[{"fill", "[", 
-                    RowBox[{
-                    "m", ",", "criticalvalue", ",", "generatingdistr"}], 
-                    "]"}]}]}], ";", "\[IndentingNewLine]", 
-                   RowBox[{"If", "[", 
-                    RowBox[{
-                    RowBox[{
-                    RowBox[{"Max", "[", "m", "]"}], ">", "maxval"}], ",", 
-                    RowBox[{"maxval", "=", 
-                    RowBox[{"Max", "[", "m", "]"}]}]}], "]"}], ";", 
-                   "\[IndentingNewLine]", 
-                   RowBox[{"avalanching", "=", "True"}], ";"}]}], 
-                 "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
-                "m"}], "\[IndentingNewLine]", ",", 
-               RowBox[{"ImageSize", "\[Rule]", 
-                RowBox[{"{", 
-                 RowBox[{"300", ",", "300"}], "}"}]}], "\[IndentingNewLine]", 
-               ",", 
-               RowBox[{"PlotLabel", "\[Rule]", "i"}], "\[IndentingNewLine]", 
-               ",", 
-               RowBox[{"PlotRange", "\[Rule]", 
-                RowBox[{"{", 
-                 RowBox[{"0", ",", "maxval"}], "}"}]}]}], "]"}], 
-             "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
-             RowBox[{"Grid", "[", 
-              RowBox[{
-               RowBox[{"{", "\[IndentingNewLine]", 
-                RowBox[{
-                 RowBox[{"{", 
-                  RowBox[{"\"\<Size\>\"", ",", "size"}], "}"}], ",", 
-                 "\[IndentingNewLine]", 
-                 RowBox[{"{", 
-                  RowBox[{"\"\<Iterations\>\"", ",", "i"}], "}"}], ",", 
-                 "\[IndentingNewLine]", 
-                 RowBox[{"{", 
-                  RowBox[{"\"\<Average Height\>\"", ",", "avgheight"}], 
-                  "}"}]}], "\[IndentingNewLine]", "}"}], ",", 
-               RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], 
-            "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"ListPlot", "[", 
-              RowBox[{"avalanchelength", ",", 
-               RowBox[{"PlotLabel", "\[Rule]", "\"\<Avalanche Length\>\""}]}],
-               "]"}], ",", "\[IndentingNewLine]", 
-             RowBox[{"Histogram", "[", 
-              RowBox[{"avalanchelength", "[", 
-               RowBox[{"[", 
-                RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], 
-            "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
-           RowBox[{"{", "\[IndentingNewLine]", 
-            RowBox[{
-             RowBox[{"ListPlot", "[", 
-              RowBox[{"avalanchesize", ",", 
-               RowBox[{"PlotLabel", "\[Rule]", "\"\<Avalanche Length\>\""}]}],
-               "]"}], ",", "\[IndentingNewLine]", 
-             RowBox[{"Histogram", "[", 
-              RowBox[{"avalanchesize", "[", 
-               RowBox[{"[", 
-                RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], 
-            "\[IndentingNewLine]", "}"}]}], "}"}], "\[IndentingNewLine]", 
-         "]"}], "]"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
-     ",", "\[IndentingNewLine]", 
-     RowBox[{"{", 
-      RowBox[{"size", ",", "5", ",", "50", ",", "1"}], "}"}], ",", 
-     "\[IndentingNewLine]", 
-     RowBox[{"{", 
-      RowBox[{"initialdistr", ",", 
-       RowBox[{"{", 
-        RowBox[{
-        "\"\<Uniform\>\"", ",", "\"\<Zero\>\"", ",", "\"\<Critical\>\""}], 
-        "}"}]}], "}"}], ",", "\[IndentingNewLine]", 
-     RowBox[{"{", 
-      RowBox[{"criticalvalue", ",", "2", ",", "10", ",", "1"}], "}"}], ",", 
-     "\[IndentingNewLine]", 
-     RowBox[{"{", 
-      RowBox[{"generatingdistr", ",", 
-       RowBox[{"{", 
-        RowBox[{
-        "\"\<Fill\>\"", ",", "\"\<Centered\>\"", ",", "\"\<Uniform\>\"", ",", 
-         "\"\<None\>\""}], "}"}]}], "}"}], ",", "\[IndentingNewLine]", 
-     RowBox[{"{", 
-      RowBox[{"run", ",", 
-       RowBox[{"{", 
-        RowBox[{"False", ",", "True"}], "}"}]}], "}"}]}], 
-    "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]"}]}]], "Input",
- CellChangeTimes->{
-  3.6891382821639442`*^9, {3.6891392957590714`*^9, 3.689139327330873*^9}, {
-   3.689139366458383*^9, 3.689139434113359*^9}, {3.689139478898641*^9, 
-   3.689139480657194*^9}, {3.689139548691512*^9, 3.689139578006604*^9}, {
-   3.6891397039381523`*^9, 3.6891397050669622`*^9}, {3.68913977616931*^9, 
-   3.689139854609323*^9}, {3.689139892739031*^9, 3.689139911692461*^9}, {
-   3.689139956257084*^9, 3.689139991984437*^9}, {3.689140022806122*^9, 
-   3.689140165148444*^9}, {3.689140385897931*^9, 3.689140564554064*^9}, {
-   3.689140609610997*^9, 3.689140695220276*^9}, {3.689140777316478*^9, 
-   3.689140811542007*^9}, {3.6891898152618837`*^9, 3.689189834401931*^9}, {
-   3.6891899474556*^9, 3.689190091442829*^9}, {3.689190238147854*^9, 
-   3.689190268659389*^9}, {3.689190302256765*^9, 3.689190302673359*^9}, {
-   3.689191359099886*^9, 3.689191362136283*^9}, {3.689191490178334*^9, 
-   3.68919149195078*^9}, {3.689192102614901*^9, 3.689192105379537*^9}, {
-   3.689192509960966*^9, 3.689192530534958*^9}, {3.689192566173092*^9, 
-   3.689192598892089*^9}, {3.689192632648995*^9, 3.68919263981641*^9}, {
-   3.68919268530348*^9, 3.689192713698237*^9}, {3.68919275539635*^9, 
-   3.6891927653442574`*^9}, {3.689192801225574*^9, 3.68919291929593*^9}, {
-   3.689193152736278*^9, 3.689193181149995*^9}, {3.6891932677157173`*^9, 
-   3.689193273034021*^9}, {3.689193666257105*^9, 3.689193681821677*^9}, {
-   3.689195207813966*^9, 3.689195232825178*^9}, {3.689195269685033*^9, 
-   3.689195291624207*^9}, {3.689195343305758*^9, 3.689195349214555*^9}, {
-   3.689195427413341*^9, 3.689195429968392*^9}, {3.689195461335238*^9, 
-   3.689195485639306*^9}, {3.689195521090724*^9, 3.689195554340035*^9}, {
-   3.6891965098553467`*^9, 3.68919653715825*^9}, {3.6891969654627733`*^9, 
-   3.689196991043762*^9}, {3.689197658910336*^9, 3.689197706945969*^9}, {
-   3.689197874738268*^9, 3.689197915495832*^9}, {3.689203480493123*^9, 
-   3.6892034814179993`*^9}, {3.689203713727036*^9, 3.68920375012158*^9}, {
-   3.6892037838534813`*^9, 3.689203964096814*^9}, {3.689204006651971*^9, 
-   3.6892040104923477`*^9}, {3.689206875346786*^9, 3.6892068866001062`*^9}, {
-   3.689207458112698*^9, 3.68920759389126*^9}, {3.689207726035534*^9, 
-   3.689207762125085*^9}, {3.689208025306028*^9, 3.689208027765657*^9}, {
-   3.689208062886126*^9, 3.6892081090206423`*^9}, {3.6892081698719053`*^9, 
-   3.689208221241893*^9}, {3.689208261214559*^9, 3.689208281929257*^9}, {
-   3.689383694633143*^9, 3.689383742690834*^9}, {3.6893839284372387`*^9, 
-   3.6893839597098083`*^9}, {3.689384022734043*^9, 3.689384042278592*^9}, {
-   3.6893840841813383`*^9, 3.6893842719079*^9}, 3.689384352712492*^9, {
-   3.689384503607313*^9, 3.689384532175351*^9}, {3.689384573704191*^9, 
-   3.689384594538106*^9}, {3.6893846668665123`*^9, 3.6893847007670183`*^9}, {
-   3.689384802296936*^9, 3.689384816189348*^9}, {3.689384893424657*^9, 
-   3.689384897011189*^9}, {3.689384944726244*^9, 3.6893850795235233`*^9}, {
-   3.689385479104125*^9, 3.689385480044586*^9}, {3.689386172939402*^9, 
-   3.689386183534944*^9}, {3.689474675705894*^9, 3.689474689633214*^9}, {
-   3.68947473507345*^9, 3.689474739989723*^9}, {3.690417026477188*^9, 
-   3.6904170303656197`*^9}, {3.690417104076743*^9, 3.690417104929799*^9}, {
-   3.690417167287093*^9, 3.6904171683395967`*^9}, {3.690485415359364*^9, 
-   3.690485501999851*^9}, {3.690485737463406*^9, 3.6904858127292547`*^9}, {
-   3.6904858528260593`*^9, 3.690485868049528*^9}, {3.6904861350833178`*^9, 
-   3.69048615558784*^9}, {3.690486311562085*^9, 3.690486313616634*^9}, {
-   3.690486356043331*^9, 3.690486392955407*^9}, {3.690486478584648*^9, 
-   3.690486556111855*^9}, {3.690487873942794*^9, 3.6904879704832*^9}, {
-   3.6904880716639767`*^9, 3.69048807215266*^9}, {3.690489336322761*^9, 
-   3.690489375255892*^9}, {3.690490256411519*^9, 3.6904902872553883`*^9}, {
-   3.690490322338151*^9, 3.6904904441347113`*^9}, {3.690490474858232*^9, 
-   3.690490483486095*^9}, {3.6904907463787003`*^9, 3.690490805986188*^9}, {
-   3.690490881868477*^9, 3.690490882242776*^9}, {3.690490924466543*^9, 
-   3.690490944293488*^9}, {3.690491020304394*^9, 3.69049104910952*^9}, {
-   3.690491184858877*^9, 3.6904911912539186`*^9}, {3.690491444267138*^9, 
-   3.690491500769704*^9}, {3.6905020923507957`*^9, 3.690502120398211*^9}, {
-   3.690502175601416*^9, 3.6905022054450293`*^9}, {3.690502239802435*^9, 
-   3.6905023659469213`*^9}, {3.690502471426155*^9, 3.690502502486171*^9}, {
-   3.690502590303103*^9, 3.690502602761389*^9}}],
-
-Cell[BoxData[
- TagBox[
-  StyleBox[
-   DynamicModuleBox[{$CellContext`criticalvalue$$ = 
-    2, $CellContext`generatingdistr$$ = "Fill", $CellContext`initialdistr$$ = 
-    "Uniform", $CellContext`run$$ = False, $CellContext`size$$ = 5, 
-    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
-    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
-    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
-      Hold[$CellContext`size$$], 5, 50, 1}, {
-      Hold[$CellContext`initialdistr$$], {"Uniform", "Zero", "Critical"}}, {
-      Hold[$CellContext`criticalvalue$$], 2, 10, 1}, {
-      Hold[$CellContext`generatingdistr$$], {
-      "Fill", "Centered", "Uniform", "None"}}, {
-      Hold[$CellContext`run$$], {False, True}}}, Typeset`size$$ = {
-    652., {488., 492.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`size$202054$$ = 
-    0, $CellContext`initialdistr$202055$$ = 
-    0, $CellContext`criticalvalue$202056$$ = 
-    0, $CellContext`generatingdistr$202057$$ = 0, $CellContext`run$202058$$ = 
-    False}, 
-    DynamicBox[Manipulate`ManipulateBoxes[
-     1, StandardForm, 
-      "Variables" :> {$CellContext`criticalvalue$$ = 
-        2, $CellContext`generatingdistr$$ = 
-        "Fill", $CellContext`initialdistr$$ = "Uniform", $CellContext`run$$ = 
-        False, $CellContext`size$$ = 5}, "ControllerVariables" :> {
-        Hold[$CellContext`size$$, $CellContext`size$202054$$, 0], 
-        Hold[$CellContext`initialdistr$$, $CellContext`initialdistr$202055$$, 
-         0], 
-        Hold[$CellContext`criticalvalue$$, \
-$CellContext`criticalvalue$202056$$, 0], 
-        Hold[$CellContext`generatingdistr$$, \
-$CellContext`generatingdistr$202057$$, 0], 
-        Hold[$CellContext`run$$, $CellContext`run$202058$$, False]}, 
-      "OtherVariables" :> {
-       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
-        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
-        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
-         Typeset`skipInitDone$$}, "Body" :> 
-      DynamicModule[{$CellContext`i = 
-         0, $CellContext`m = $CellContext`InitializePile[$CellContext`size$$, \
-$CellContext`initialdistr$$, $CellContext`criticalvalue$$], \
-$CellContext`maxval = 0, $CellContext`avgheight = 
-         0, $CellContext`totaltopples = 0, $CellContext`topples = 
-         0, $CellContext`avalanching = 
-         False, $CellContext`avalanche = \
-$CellContext`InitializePile[$CellContext`size$$, 
-           "Zero", $CellContext`criticalvalue$$], $CellContext`touched = \
-$CellContext`InitializePile[$CellContext`size$$, 
-           "Zero", $CellContext`criticalvalue$$], $CellContext`avalancheiters = 
-         0, $CellContext`avalanchelength = {}, $CellContext`avalanchesize = \
-{}, $CellContext`running = False}, 
-        Dynamic[
-         GraphicsGrid[{{
-            BarChart[
-            If[Max[$CellContext`m] > $CellContext`maxval, $CellContext`maxval = 
-               Max[$CellContext`m]]; 
-             If[$CellContext`maxval == 0, $CellContext`maxval = 
-               1]; $CellContext`avgheight = N[
-                Mean[$CellContext`m]]; 
-             If[$CellContext`run$$, $CellContext`running = True; 
-               Null, $CellContext`running = False; $CellContext`avalanching = 
-                False; Null]; 
-             If[$CellContext`avalanching, 
-               Pause[0.01]; {$CellContext`avalanche, \
-$CellContext`avalanching, $CellContext`touched, $CellContext`topples} = \
-$CellContext`Avalanche[$CellContext`m, $CellContext`criticalvalue$$, \
-$CellContext`touched]; $CellContext`m = $CellContext`m + \
-$CellContext`avalanche; 
-               If[$CellContext`avalanching, 
-                 Increment[$CellContext`avalancheiters]; $CellContext`running = 
-                  False; Null, $CellContext`avalanchelength = 
-                  Join[{{$CellContext`i, $CellContext`avalancheiters}}, \
-$CellContext`avalanchelength]; $CellContext`avalanchesize = 
-                  Join[{{$CellContext`i, 
-                    
-                    Total[$CellContext`touched]}}, \
-$CellContext`avalanchesize]; $CellContext`touched = \
-$CellContext`InitializePile[$CellContext`size$$, 
-                    "Zero", $CellContext`criticalvalue$$]; \
-$CellContext`avalancheiters = 0; $CellContext`running = True; Null]; Null]; 
-             If[$CellContext`running, $CellContext`avgheight = N[
-                  Mean[$CellContext`m]]; 
-               Pause[0.01]; $CellContext`i = $CellContext`i + 
-                 1; $CellContext`m = $CellContext`m + \
-$CellContext`fill[$CellContext`m, $CellContext`criticalvalue$$, \
-$CellContext`generatingdistr$$]; 
-               If[Max[$CellContext`m] > $CellContext`maxval, \
-$CellContext`maxval = Max[$CellContext`m]]; $CellContext`avalanching = True; 
-               Null]; $CellContext`m, ImageSize -> {300, 300}, 
-             PlotLabel -> $CellContext`i, 
-             PlotRange -> {0, $CellContext`maxval}], 
-            
-            Grid[{{"Size", $CellContext`size$$}, {
-              "Iterations", $CellContext`i}, {
-              "Average Height", $CellContext`avgheight}}, Frame -> All]}, {
-            
-            ListPlot[$CellContext`avalanchelength, PlotLabel -> 
-             "Avalanche Length"], 
-            Histogram[
-             Part[$CellContext`avalanchelength, All, 2]]}, {
-            
-            ListPlot[$CellContext`avalanchesize, PlotLabel -> 
-             "Avalanche Length"], 
-            Histogram[
-             Part[$CellContext`avalanchesize, All, 2]]}}]]], 
-      "Specifications" :> {{$CellContext`size$$, 5, 50, 
-         1}, {$CellContext`initialdistr$$, {
-         "Uniform", "Zero", "Critical"}}, {$CellContext`criticalvalue$$, 2, 
-         10, 1}, {$CellContext`generatingdistr$$, {
-         "Fill", "Centered", "Uniform", "None"}}, {$CellContext`run$$, {
-         False, True}}}, "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{697., {582., 587.}},
-     SingleEvaluation->True],
-    Deinitialization:>None,
-    DynamicModuleValues:>{},
-    SynchronousInitialization->True,
-    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
-    UnsavedVariables:>{Typeset`initDone$$},
-    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
-   Deployed->True,
-   StripOnInput->False],
-  Manipulate`InterpretManipulate[1]]], "Output",
- CellChangeTimes->{
-  3.689384369600779*^9, {3.68938453902145*^9, 3.689384564331027*^9}, 
-   3.689384603278397*^9, 3.6893846745621147`*^9, {3.689384804468492*^9, 
-   3.689384817026346*^9}, 3.689384898142068*^9, 3.6893849491020937`*^9, 
-   3.6893850677766027`*^9, 3.689385453313951*^9, {3.689385484135734*^9, 
-   3.6893855044171753`*^9}, 3.689385586029091*^9, {3.689385689393072*^9, 
-   3.689385741825293*^9}, 3.689385812513947*^9, {3.689386003789351*^9, 
-   3.689386027463387*^9}, {3.689386073554811*^9, 3.689386098961729*^9}, 
-   3.6893861352897987`*^9, 3.689386184268572*^9, 3.6893862914623537`*^9, {
-   3.689474657864416*^9, 3.689474690008819*^9}, 3.689474740571311*^9, {
-   3.6904171448075314`*^9, 3.690417169762774*^9}, {3.69048545165886*^9, 
-   3.690485472049102*^9}, 3.690485502357874*^9, 3.690485745330143*^9, 
-   3.690485871983203*^9, 3.690486156560691*^9, {3.690486233840418*^9, 
-   3.6904862691716003`*^9}, {3.6904863140324802`*^9, 3.6904863302754107`*^9}, 
-   3.690486363287539*^9, {3.690486393774288*^9, 3.690486395616356*^9}, {
-   3.690486488060326*^9, 3.690486557259276*^9}, 3.690486956767823*^9, 
-   3.690487062765773*^9, 3.6904872315426483`*^9, {3.690487935188848*^9, 
-   3.6904879813440123`*^9}, 3.690488083307939*^9, 3.69048895469396*^9, {
-   3.690489352226845*^9, 3.690489382295326*^9}, 3.690490351114648*^9, 
-   3.690490389968357*^9, 3.690490421274172*^9, 3.690490484186645*^9, 
-   3.690490889054525*^9, 3.690490945599251*^9, 3.69049104955829*^9, {
-   3.690491194721727*^9, 3.6904912222544823`*^9}, {3.6904914495369797`*^9, 
-   3.690491502051072*^9}, 3.690495171365677*^9, 3.690500977780303*^9, {
-   3.690502366616604*^9, 3.69050239533611*^9}, 3.6905026031931*^9}]
-}, Open  ]],
 
 Cell[BoxData[
  RowBox[{
@@ -1545,25 +1058,24 @@ Cell[BoxData[
         StyleBox["2", {}, StripOnInput -> False]],
        Annotation[#, 
         Style[2, {}], "Tooltip"]& ]}}, {}, {}}, {}, {}, 
-   StyleBox[
-    StyleBox[{
-      {Thickness[Tiny], 
-       LineBox[{{0.13851851851851854`, 0.}, {20.869451851851853`, 0.}}], 
-       StyleBox[{}, "GraphicsLabel",
-        StripOnInput->False]}, 
-      StyleBox[{
-        {Thickness[Tiny], 
-         LineBox[{{0.5370370370370371, 0.}, 
-           Offset[{-1.102182119232618*^-15, -6.}, {0.5370370370370371, 0.}]}],
-          LineBox[{{20.462962962962965`, 0.}, 
-           Offset[{-1.102182119232618*^-15, -6.}, {20.462962962962965`, 
-            0.}]}], {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+   StyleBox[{
+     {Thickness[Tiny], 
+      LineBox[{{0.13851851851851854`, 0.}, {20.869451851851853`, 0.}}], 
+      StyleBox[{}, "GraphicsLabel",
+       StripOnInput->False]}, 
+     StyleBox[{
+       {Thickness[Tiny], 
+        LineBox[{{0.5370370370370371, 0.}, 
+          Offset[{-1.102182119232618*^-15, -6.}, {0.5370370370370371, 0.}]}], 
+        LineBox[{{20.462962962962965`, 0.}, 
+          Offset[{-1.102182119232618*^-15, -6.}, {20.462962962962965`, 
+           0.}]}], {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
 {}, {}, {}, {}, {}, {}, {}, {}}}, 
-        StyleBox[{}, "GraphicsLabel",
-         StripOnInput->False]}, "GraphicsTicks",
-       StripOnInput->False]},
-     Antialiasing->False], "GraphicsAxes",
-    StripOnInput->False]},
+       StyleBox[{}, "GraphicsLabel",
+        StripOnInput->False]}, "GraphicsTicks",
+      StripOnInput->False]}, "GraphicsAxes",
+    StripOnInput->False,
+    Antialiasing->False]},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->{False, True},
   AxesLabel->{None, None},
@@ -2129,7 +1641,6 @@ g3RWhZczWiPQ26tekZtJ51cyFz99IlBoxFwdjfS/985ZFw==
    3.690508156608892*^9, 3.690508177731518*^9}, {3.690508309284196*^9, 
    3.690508324286256*^9}}]
 }, Open  ]]
-}, Open  ]]
 },
 WindowSize->{1280, 703},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
@@ -2148,26 +1659,19 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[CellGroupData[{
-Cell[580, 22, 619, 10, 117, "Subsubsection"],
-Cell[1202, 34, 3744, 76, 267, "Input",
+Cell[558, 20, 3744, 76, 267, "Input",
  InitializationCell->True],
-Cell[4949, 112, 4665, 106, 352, "Input"],
-Cell[9617, 220, 7372, 153, 607, "Input"],
+Cell[4305, 98, 4665, 106, 352, "Input"],
+Cell[8973, 206, 7372, 153, 607, "Input"],
+Cell[16348, 361, 10319, 216, 1117, "Input"],
 Cell[CellGroupData[{
-Cell[17014, 377, 16887, 319, 1457, "Input"],
-Cell[33904, 698, 8063, 147, 1186, "Output"]
+Cell[26692, 581, 595, 13, 28, "Input"],
+Cell[27290, 596, 27682, 750, 308, "Print"]
 }, Open  ]],
-Cell[41982, 848, 10319, 216, 1117, "Input"],
+Cell[54987, 1349, 8276, 195, 420, "Input"],
 Cell[CellGroupData[{
-Cell[52326, 1068, 595, 13, 28, "Input"],
-Cell[52924, 1083, 27712, 751, 308, "Print"]
-}, Open  ]],
-Cell[80651, 1837, 8276, 195, 420, "Input"],
-Cell[CellGroupData[{
-Cell[88952, 2036, 288, 5, 28, "Input"],
-Cell[89243, 2043, 4551, 86, 238, "Output"]
-}, Open  ]]
+Cell[63288, 1548, 288, 5, 28, "Input"],
+Cell[63579, 1555, 4551, 86, 238, "Output"]
 }, Open  ]]
 }
 ]
