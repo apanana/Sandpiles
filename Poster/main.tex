@@ -122,21 +122,34 @@ The \textit{sandpile} model was first introduced in 1978 by Bak, Tang, and Weise
 \begin{column}{\onecolwid} % The first column
 
 %----------------------------------------------------------------------------------------
-%	MATERIALS
+%	SANDPILES
 %----------------------------------------------------------------------------------------
 
 \begin{block}{Sandpiles}
 
+In very general terms, sandpiles can be thought of as cellular automota. There are three things that characterize the behavior of a specific configuration:
+\begin{itemize}
+\item A measure $z$ (not in the formal sense)
+\item A critical value $K$
+\item Some action $f$ by which a cell reduces its measure
+\end{itemize} 
+Whenever a cell's measure exceeds the critical value, it performs the action $f$. (i.e. when a cell $x$ has $z(x)>K$, $f(x)$ happens).
 
+In the original paper, this is defined more strictly: when a cell's slope with its neighbors exceeds a critical value, it loses some of its weight to its nieghbors. However, I prefer to use looser defintions because I believe the stricter ones might give some false intuition about the measure. While slope is a good example because of its physical parallels, it suggests that the measure must be defined on a relationship between a cell and its neighbors. However this does not seem to be the case according to simulated results, as I will discuss later.
+
+For the sake of simplicity and clarity, I focused on the 1D and 2D models used by Bak, Tang, and Weisenfeld, as well as some variants in the 2D case.
 
 \end{block}
 
-
 %----------------------------------------------------------------------------------------
-%	METHODS
+%	SETUP
 %----------------------------------------------------------------------------------------
 
-\begin{block}{Measurements}
+\begin{block}{Setup}
+
+As physical experiments have found, observing SOC on real sandpiles is not easy or necessarily possible. Instead, I use Monte Carlo simulations because they provide very high control over the parameters, which we expect to be important in observing SOC, and because they provide can provide fine-grain measurements that might not be easy to obtain in a physical setting.
+
+In all configurations, I add grains to the system uniformly, because that seems to be the ``most'' random way of perturbing the system. The key measurements of interest are the size and length of avalanches. 
 
 
 \end{block}
@@ -156,7 +169,7 @@ The \textit{sandpile} model was first introduced in 1978 by Bak, Tang, and Weise
 %	MATHEMATICAL SECTION
 %----------------------------------------------------------------------------------------
 
-\begin{block}{1D Simulation Results}
+\begin{block}{1D BTW Results}
 
 
 \end{block}
@@ -166,7 +179,7 @@ The \textit{sandpile} model was first introduced in 1978 by Bak, Tang, and Weise
 %	RESULTS
 %----------------------------------------------------------------------------------------
 
-\begin{block}{2D Simulation Results}
+\begin{block}{2D BTW Results}
 
 % \begin{figure}
 % \includegraphics[width=0.8\linewidth]{placeholder.jpg}
@@ -195,9 +208,15 @@ The \textit{sandpile} model was first introduced in 1978 by Bak, Tang, and Weise
 
 \end{column} % End of column 2.2
 
+
 \begin{column}{\sepwid}\end{column} % Empty spacer column
 
 \begin{column}{\onecolwid} % The third column
+
+
+\begin{block}{Modified 2D Results}
+
+\end{block}
 
 %----------------------------------------------------------------------------------------
 %	CONCLUSION
@@ -236,6 +255,7 @@ The \textit{sandpile} model was first introduced in 1978 by Bak, Tang, and Weise
 \item Github: \href{https://github.com/apanana/Sandpiles}{https://github.com/apanana/Sandpiles}
 \end{itemize}
 
+There are several Mathematica notebooks containing both data and user-interactive dynamic modules that allow for further manipulation of parameters
 \end{alertblock}
 
 %----------------------------------------------------------------------------------------
