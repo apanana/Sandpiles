@@ -64,7 +64,7 @@
 %	TITLE SECTION 
 %----------------------------------------------------------------------------------------
 
-\title{Sandpiles} % Poster title
+\title{Toppling Invariant Self-Organized Criticality of Avalanche Size in Sandpiles} % Poster title
 
 \author{Alex Pan} % Author(s)
 
@@ -77,7 +77,7 @@
 \addtobeamertemplate{block end}{}{\vspace*{2ex}} % White space under blocks
 \addtobeamertemplate{block alerted end}{}{\vspace*{2ex}} % White space under highlighted (alert) blocks
 
-\setlength{\belowcaptionskip}{2ex} % White space under figures
+\setlength{\belowcaptionskip}{1ex} % White space under figures
 \setlength\belowdisplayshortskip{2ex} % White space under equations
 
 \begin{frame}[t] % The whole poster is enclosed in one beamer frame
@@ -111,7 +111,7 @@ The \textit{sandpile} model was first introduced in 1978 by Bak, Tang, and Weise
 %------------------------------------------------
 
 \begin{block}{Criticality}
-\textit{Critical points} exhibit scale-invariance through features like fractals and power laws, but cannot necessarily be reached depending on a system's parameters. For example, in the Ising model, the system doesn't display critical behavior unless the parameters have been carefully tuned. However, in systems that exhibit SOC, parameters can be changed widely without affecting the systems' ability to start exhibiting critical behavior.
+\textit{Critical points} exhibit scale-invariance through features like fractals and power laws. Notably, certain features are distributed according to $f(x)=\alpha x^{-\beta}$. However, these states cannot necessarily be reached depending on a system's parameters. For example, in the Ising model, the system doesn't display critical behavior unless the parameters have been carefully tuned. However, in systems that exhibit SOC, parameters can be changed widely without affecting the systems' ability to start exhibiting critical behavior.
 \end{block}
 
 %----------------------------------------------------------------------------------------
@@ -174,7 +174,7 @@ In all configurations, I add grains to the system uniformly, because that seems 
 The 1D case serves mainly as a proof of concept and a clean example of what criticality would look like intuitively. The BTW paper bounds their 1D sandpile on the left so that particles can only leave through the right. We expect the sandpile to reach a state where adding a subsequent grain could trigger either a local or global avalanche. This is confirmed by simulation: when starting with an empty pile and uniformly adding grains, the sandpile converges to the critical state (see Figure 1).
 
 \begin{figure}
-\includegraphics[width=0.4\linewidth]{1D.jpg}
+\includegraphics[width=0.6\linewidth]{1D.jpg}
 \caption{Bounded 1D sandpile after 50 000 iterations}
 \end{figure}
 \end{block}
@@ -227,7 +227,7 @@ Data was gathered from size 15x15 piles over 10,000 iterations, with varied meas
 
 \begin{block}{Conclusion and Future Work}
 
-Though it is tempting to say SOC is invariant to the toppling process, that is not necessarily the case. Though invariance was observed for $P(s)$, it was found that in the ``Sloped'' configuration, plots of the avalanche length no longer exhibit power laws.
+Though it is tempting to say SOC in general is invariant to the toppling process, that is not necessarily the case. Though invariance was observed for $P(s)$, it was found that in the ``Sloped'' configuration, plots of the avalanche length no longer exhibit power laws.
 It is also noted that the toppling process does affect the range of possible avalanche sizes, even if power laws were still observed. A question that remains unanswered is whether this behavior is true for all toppling rules or if the ones I used were simply lucky picks.
 Further work could be done on either a closer examination of other SOC features affected by toppling behavior, or an investigation into the effects of other topplings rules on avalanche size.
 
