@@ -25,6 +25,7 @@
 \documentclass[final]{beamer}
 
 \usepackage[scale=1.24]{beamerposter} % Use the beamerposter package for laying out the poster
+\usepackage{graphicx}
 
 \usetheme{confposter} % Use the confposter theme supplied with this template
 
@@ -103,7 +104,7 @@ In the following, I will discuss the sandpile model and the closely-related phen
 
 \begin{block}{Introduction}
 
-The \textit{sandpile} model was first introduced in 1978 by Bak, Tang, and Weisenfeld, as a system capable of displaying spatial and temporal power laws and scale-invariance without finely-tuned parameters. This behavior was described as \textit{self-organized criticality} (SOC) because of the way these systems can arrive at critical states on their own. SOC was given as the underlying process behind ubiquitous and complex phenomena like fractal geometry and ``$1/f$'' noise in the 1987 paper, and has since been used to model physical systems like earthquakes and rainfall, as well as non-physical systems in sociology and stock-markets.
+The \textit{sandpile} model was first introduced in 1978 by Bak, Tang, and Weisenfeld (BTW),  as a system capable of displaying spatial and temporal power laws and scale-invariance without finely-tuned parameters. This behavior was described as \textit{self-organized criticality} (SOC) because of the way these systems can arrive at critical states on their own. SOC was given as the underlying process behind ubiquitous and complex phenomena like fractal geometry and ``$1/f$'' noise in the 1987 paper, and has since been used to model physical systems like earthquakes and rainfall, as well as non-physical systems in sociology and stock-markets.
 
 \end{block}
 
@@ -166,25 +167,39 @@ In all configurations, I add grains to the system uniformly, because that seems 
 \begin{column}{\onecolwid} % The first column within column 2 (column 2.1)
 
 %----------------------------------------------------------------------------------------
-%	MATHEMATICAL SECTION
+%	1D BTW
 %----------------------------------------------------------------------------------------
-
 \begin{block}{1D BTW Results}
 
+The 1D case serves mainly as a proof of concept and a clean example of what criticality would look like intuitively. The BTW paper bounds their 1D sandpile on the left so that particles can only leave through the right. We expect the sandpile to reach a state where adding a subsequent grain could trigger either a local or global avalanche. This is confirmed by simulation: when starting with an empty pile and uniformly adding grains, the sandpile converges to the critical state (see Figure 1).
 
+\begin{figure}
+\includegraphics[width=0.4\linewidth]{1D.jpg}
+\caption{Bounded 1D sandpile after 50 000 iterations}
+\end{figure}
 \end{block}
 
 
 %----------------------------------------------------------------------------------------
-%	RESULTS
+%	2D BTW
 %----------------------------------------------------------------------------------------
 
-\begin{block}{2D BTW Results}
+\begin{block}{2D Configuration Results}
 
-% \begin{figure}
-% \includegraphics[width=0.8\linewidth]{placeholder.jpg}
-% \caption{Figure caption}
-% \end{figure}
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{2D-btw.jpg}
+\caption{Figure caption}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{2D-sloped.jpg}
+\caption{Figure caption}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{2D-indep.jpg}
+\caption{Figure caption}
+\end{figure}
 
 % Nunc tempus venenatis facilisis. Curabitur suscipit consequat eros non porttitor. Sed a massa dolor, id ornare enim:
 
